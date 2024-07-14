@@ -60,7 +60,7 @@ export default function Home() {
       openNotificationWithIcon('error', 'کمبود نفرات', 'بازی مافیا با حداقل 5 نفر می تواند آغاز شود.');
     }else{
       openNotificationWithIcon('success', 'تایید شد!', 'درحال رفتن به صفحه انتخاب نقش ...');
-      setTimeout(() => redirectLink.current!.click(), 600);
+      setTimeout(() => (redirectLink.current! as HTMLElement).click(), 600);
     }
   }
 

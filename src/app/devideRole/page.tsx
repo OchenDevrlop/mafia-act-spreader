@@ -19,13 +19,13 @@ export default function devideRole(){
 
   const showActModal = (event: Event) => {
     players.map((value) => {
-      if(event!.target!.innerText == value.role){
+      if((event!.target! as HTMLElement).innerText == value.role){
         setModalInfo({
           isOpen: true,
           actTitle: value.name,
           description: ""
         });
-        event!.target!.style!.display = 'none'
+        (event!.target! as HTMLElement).style!.display = 'none'
       }
     })
   }
@@ -88,7 +88,7 @@ export default function devideRole(){
           }}>
               
               {players.map((player, index) =>
-                <Flex justify="center" align="center" key={index + 1} onClick={()=>showActModal(event)} style={{
+                <Flex justify="center" align="center" key={index + 1} onClick={()=>showActModal(event as Event)} style={{
                   textAlign: "center",
                   padding: "18px 34px",
                   backgroundColor: "#ff8519",

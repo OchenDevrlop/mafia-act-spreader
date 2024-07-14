@@ -40,13 +40,13 @@ export default function selectRole(){
             let players : Player = JSON.parse(localStorage.getItem("players")!);
             await shuffle(persianFinalActs);
             await shuffle(players)
-            await players.map((player: any, index: number) => {
+            await (players as any).map((player: any, index: number) => {
                 persianFinalActs[index].role = player.name.toString();
             })
         }catch(e){}
         console.log(persianFinalActs)
         localStorage.setItem("players", JSON.stringify(persianFinalActs));
-        await redirectLink.current!.click();
+        await (redirectLink.current! as HTMLElement).click();
     }
 
     const devideRole = async () => {
