@@ -73,9 +73,13 @@ export default function Home() {
         console.log("Error:", error)
       }
     }
+    document.querySelectorAll('*').forEach((elem) => {
+      elem.classList.add(vazir.className);
+    })
   }, [])
 
   return (
+    
     <>
 
       {InstrictJSXForNotification}
@@ -181,7 +185,7 @@ export default function Home() {
             <Button type="primary" onClick={authenticatePlayers} className={vazir.className}>تقسیم و انتخاب نقش ها بین بازیکنان انتخاب شده</Button>
         </Flex>
 
-        <Link href="./selectRole" key={1} ref={redirectLink} />
+        <Link href="./selectRole" key={5} ref={redirectLink} />
 
       </Flex>
      </>

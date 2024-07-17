@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, Modal, notification } from "antd";
+import { Col, Flex, Grid, Modal, Row, notification } from "antd";
 import { Vazirmatn } from "next/font/google";
 import { UndoOutlined, EyeOutlined } from "@ant-design/icons";
 import { useEffect, useState, useRef } from "react";
@@ -38,7 +38,7 @@ export default function devideRole(){
           setTimeout(
             () => {
               (redirectLink.current! as HTMLElement).click();
-          }, 1000);
+          }, 2222);
         }
       }
     })
@@ -58,10 +58,13 @@ export default function devideRole(){
     }catch(e){
       (redirectLink.current! as HTMLElement).click();
     }
+    document.querySelectorAll('*').forEach((elem) => {
+      elem.classList.add(vazir.className);
+    })
   }, [])
 
     return (
-        <Flex className={vazir.className} style={{
+        <Flex style={{
             color: "#fff",
             flexDirection: "column"
         }}>
@@ -81,9 +84,11 @@ export default function devideRole(){
             actTitle: '',
             description: ''
           })} footer={(_, {OkBtn}) => (
-              <>
-                <OkBtn key={1} />
-              </>
+              <Row>
+                <Col span={24}>
+                  <OkBtn key={1} />
+                </Col>
+              </Row>
             )}
           >
             <h1 style={{

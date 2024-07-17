@@ -18,10 +18,15 @@ var persianFinalActs : any = [];
 export default function selectRole(){
 
     let players : Player[] = [];
+    const [playersLength, setPlayersLength] = useState<number>(0);
     
     useEffect(() => {
         document.title = "انتخاب نقش ها | مافیایی".trim();
         players = JSON.parse(localStorage.getItem("players")!)
+        setPlayersLength(+players.length);
+        document.querySelectorAll('*').forEach((elem) => {
+            elem.classList.add(vazir.className);
+        })
     })
 
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -101,23 +106,23 @@ export default function selectRole(){
 
     return (
 
-        <Flex gap={4} style={{
+        <Flex gap={4} key={1} style={{
             flexDirection: "column"
         }}>
 
-          <Modal title="تعداد هر نقش" open={isModalOpen} onOk={handleOk} onCancel={closeModal} onClose={closeModal}>
-            <Form form={modalForm}>
+          <Modal key={1} title="تعداد هر نقش" open={isModalOpen} onOk={handleOk} onCancel={closeModal} onClose={closeModal}>
+            <Form key={1} form={modalForm}>
                 { persianFinalActs.map((value: {name: string, englishName: string, role?: string}) =>
-                    <Form.Item name={value.englishName} label={value.name ? value.name : value.role} initialValue={1} rules={[{
+                    <Form.Item key={1} name={value.englishName} label={value.name ? value.name : value.role} initialValue={1} rules={[{
                         required: true
                     }]}>
-                        <Input type="number" />
+                        <Input key={1} type="number" />
                     </Form.Item>
                 )}
             </Form>
           </Modal>
 
-          <Flex justify="space-around" align="center" style={{
+          <Flex key={2} justify="space-around" align="center" style={{
               height: 50,
               width: "100%",
               backgroundColor: "#dd5419",
@@ -125,11 +130,11 @@ export default function selectRole(){
               borderBottomRightRadius: 16,
               color: "#fff"
           }}>
-              <span>تعداد بازیکن ها: {players.length} نفر</span>
-              <PlusOutlined />
+              <span key={1}>تعداد بازیکن ها: {playersLength} نفر</span>
+              <PlusOutlined key={2} />
           </Flex>
 
-          <Flex justify="space-around" align="center" style={{
+          <Flex key={3} justify="space-around" align="center" style={{
               height: 29,
               width: "98%",
               backgroundColor: "#006600aa",
@@ -137,40 +142,40 @@ export default function selectRole(){
               color: "#fff",
               margin: "0 auto"
           }}>
-              <span style={{
+              <span key={1} style={{
                 fontSize: 15
               }}>نقش های شهروند</span>
           </Flex>
 
-          <Flex justify="space-around" align="center" wrap="wrap" gap={10} style={{
+          <Flex key={4} justify="space-around" align="center" wrap="wrap" gap={10} style={{
               width: "100%",
               color: "#fff",
               margin: "7px auto"
           }}>
-            <Form form={citizenForm} style={{
+            <Form key={1} form={citizenForm} style={{
                 width: "100%",
                 display: "flex",
                 flexWrap: "wrap",
                 justifyContent: "space-between",
                 alignItems: "center"
             }}>
-            {CitizenRoles.map((role) => 
-                <Form.Item name={role.englishName}>
-                  <Flex justify="space-around" align="center" gap={2} style={{
+            {CitizenRoles.map((role, index) => 
+                <Form.Item key={index + 1} name={role.englishName}>
+                  <Flex key={index + 1} justify="space-around" align="center" gap={2} style={{
                       fontSize: 10,
                       width: "29vw",
                       border: "#006600aa solid 3px",
                       borderRadius: 6
                   }}>
-                      <Checkbox />
-                      <span>{role.name}</span>
+                      <Checkbox key={index + 1} />
+                      <span key={index + 2}>{role.name}</span>
                   </Flex>
                 </Form.Item>
             )}
             </Form>
           </Flex>
 
-          <Flex justify="space-around" align="center" style={{
+          <Flex key={5} justify="space-around" align="center" style={{
               height: 29,
               width: "98%",
               backgroundColor: "#660000aa",
@@ -178,40 +183,40 @@ export default function selectRole(){
               color: "#fff",
               margin: "0 auto"
           }}>
-              <span style={{
+              <span key={1} style={{
                 fontSize: 15
               }}>نقش های مافیا</span>
           </Flex>
 
-          <Flex justify="space-around" align="center" wrap="wrap" gap={10} style={{
+          <Flex key={6} justify="space-around" align="center" wrap="wrap" gap={10} style={{
               width: "100%",
               color: "#fff",
               margin: "7px auto"
           }}>
-            <Form form={mafiaForm} style={{
+            <Form key={1} form={mafiaForm} style={{
                 width: "100%",
                 display: "flex",
                 flexWrap: "wrap",
                 justifyContent: "space-between",
                 alignItems: "center"
             }}>
-            {MafiaRoles.map((role) =>
-                <Form.Item name={role.englishName}>
-                  <Flex justify="space-around" align="center" gap={2} style={{
+            {MafiaRoles.map((role, index) =>
+                <Form.Item key={index + 1} name={role.englishName}>
+                  <Flex key={index + 1} justify="space-around" align="center" gap={2} style={{
                       fontSize: 10,
                       width: "29vw",
                       border: "#660000aa solid 3px",
                       borderRadius: 6
                   }}>
-                      <Checkbox />
-                      <span>{role.name}</span>
+                      <Checkbox key={index + 1} />
+                      <span key={index + 2}>{role.name}</span>
                   </Flex>
                 </Form.Item>
             )}
             </Form>
           </Flex>
 
-          <Flex justify="space-around" align="center" style={{
+          <Flex key={7} justify="space-around" align="center" style={{
               height: 29,
               width: "98%",
               backgroundColor: "#ffaa11aa",
@@ -219,41 +224,41 @@ export default function selectRole(){
               color: "#fff",
               margin: "0 auto"
           }}>
-              <span style={{
+              <span key={1} style={{
                 fontSize: 15
               }}>نقش های مستقل</span>
           </Flex>
 
-          <Flex justify="space-around" align="center" wrap="wrap" gap={10} style={{
+          <Flex key={8} justify="space-around" align="center" wrap="wrap" gap={10} style={{
               width: "100%",
               color: "#fff",
               margin: "7px auto",
               paddingBottom: 50
           }}>
-            <Form form={independentForm} style={{
+            <Form key={1} form={independentForm} style={{
                 width: "100%",
                 display: "flex",
                 flexWrap: "wrap",
                 justifyContent: "space-between",
                 alignItems: "center"
             }}>
-            {IndependentRoles.map((role) =>
-                <Form.Item name={role.englishName}>
-                  <Flex justify="space-around" align="center" gap={2} style={{
+            {IndependentRoles.map((role, index) =>
+                <Form.Item key={index + 1} name={role.englishName}>
+                  <Flex key={index + 1} justify="space-around" align="center" gap={2} style={{
                       fontSize: 10,
                       width: "29vw",
                       border: "#ffaa11aa solid 3px",
                       borderRadius: 6
                   }}>
-                      <Checkbox />
-                      <span>{role.name}</span>
+                      <Checkbox key={index + 1} />
+                      <span key={index + 2}>{role.name}</span>
                   </Flex>
                 </Form.Item>
             )}
             </Form>
           </Flex>
 
-           <Flex justify="center" align="center" style={{
+           <Flex key={9} justify="center" align="center" style={{
              position: "fixed",
              bottom: 0,
              right: 0,
@@ -264,12 +269,12 @@ export default function selectRole(){
              padding: "12px 0",
              borderRadius: "19px 19px 0 0"
            }}>
-              <Button className={vazir.className} type="primary" onClick={devideRole} style={{
+              <Button key={1} className={vazir.className} type="primary" onClick={devideRole} style={{
                   width: "100%"
-              }}>تقسیم نقش ها میان {players.length} بازیکن</Button>
+              }}>تقسیم نقش ها میان {playersLength} بازیکن</Button>
            </Flex>
 
-           <Link href="../devideRole" ref={redirectLink} />
+           <Link key={10} href="../devideRole" ref={redirectLink} />
 
         </Flex>
     )

@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa-IR">
+    <html lang="fa-IR" className={vazir.className}>
       <head>
         <title></title>
         <meta name="description" content="" />
