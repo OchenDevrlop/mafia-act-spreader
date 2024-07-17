@@ -17,6 +17,8 @@ var persianFinalActs : any = [];
 
 export default function selectRole(){
 
+    document.title = "انتخاب نقش ها | مافیایی".trim();
+
     const players : Player[] = JSON.parse(localStorage.getItem("players")!);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [citizenForm] = Form.useForm();
@@ -41,7 +43,7 @@ export default function selectRole(){
             await shuffle(persianFinalActs);
             await shuffle(players)
             await (players as any).map((player: any, index: number) => {
-                persianFinalActs[index].role = player.name.toString();
+                persianFinalActs[index].name = player.name.toString();
             })
         }catch(e){}
         console.log(persianFinalActs)
@@ -71,21 +73,21 @@ export default function selectRole(){
         CitizenRoles.map((value) => {
             for (const key in finalActs) {
                 if(value.englishName == key){
-                    persianFinalActs = [ ...persianFinalActs, {name: value.name, englishName: value.englishName}];
+                    persianFinalActs = [ ...persianFinalActs, {role: value.name, englishName: value.englishName}];
                 }
             }
         })
         MafiaRoles.map((value) => {
             for (const key in finalActs) {
                 if(value.englishName == key){
-                    persianFinalActs = [ ...persianFinalActs, {name: value.name, englishName: value.englishName}];
+                    persianFinalActs = [ ...persianFinalActs, {role: value.name, englishName: value.englishName}];
                 }
             }
         })
         IndependentRoles.map((value) => {
             for (const key in finalActs) {
                 if(value.englishName == key){
-                    persianFinalActs = [ ...persianFinalActs, {name: value.name, englishName: value.englishName}];
+                    persianFinalActs = [ ...persianFinalActs, {role: value.name, englishName: value.englishName}];
                 }
             }
         })
@@ -101,8 +103,8 @@ export default function selectRole(){
 
           <Modal title="تعداد هر نقش" open={isModalOpen} onOk={handleOk} onCancel={closeModal} onClose={closeModal}>
             <Form form={modalForm}>
-                { persianFinalActs.map((value: {name: string, englishName: string}) =>
-                    <Form.Item name={value.englishName} label={value.name} initialValue={1} rules={[{
+                { persianFinalActs.map((value: {name: string, englishName: string, role?: string}) =>
+                    <Form.Item name={value.englishName} label={value.name ? value.name : value.role} initialValue={1} rules={[{
                         required: true
                     }]}>
                         <Input type="number" />

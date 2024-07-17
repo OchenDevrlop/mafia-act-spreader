@@ -24,6 +24,8 @@ const vazir = Vazirmatn({ subsets: ["arabic"] });
 
 export default function Home() {
 
+  document.title = "افزودن و انتخاب بازیکنان | مافیایی".trim();
+
   const [player, setPlayer] = React.useState<Player[]>([]);
   const [form] = Form.useForm();
   const redirectLink = useRef(null);
@@ -56,7 +58,6 @@ export default function Home() {
   const authenticatePlayers = () => {
     localStorage.setItem("players", JSON.stringify(player));
     if(player.length < 5){
-      // alert("Error in participators sum");
       openNotificationWithIcon('error', 'کمبود نفرات', 'بازی مافیا با حداقل 5 نفر می تواند آغاز شود.');
     }else{
       openNotificationWithIcon('success', 'تایید شد!', 'درحال رفتن به صفحه انتخاب نقش ...');

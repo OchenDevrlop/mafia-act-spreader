@@ -17,6 +17,7 @@ export default function RootLayout({
         <title></title>
         <meta name="description" content="" />
         <meta name="author" content="Hossein Toluie" />
+        <link rel="shortcut icon" href="/static/logo.png" />
       </head>
       <body className={vazir.className} dir="rtl" style={{
         outline: 0,

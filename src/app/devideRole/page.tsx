@@ -1,16 +1,24 @@
 "use client";
 
-import { Flex, Modal } from "antd";
+import { Flex, Modal, notification } from "antd";
 import { Vazirmatn } from "next/font/google";
 import { UndoOutlined, EyeOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import Link from "next/link";
 import Player from "../Interfaces/Player";
+
+type NotificationType = 'success' | 'error';
 
 const vazir = Vazirmatn({ subsets: ["arabic"] });
 
 export default function devideRole(){
 
+  document.title = "نمایش و پخش نقش ها | مافیایی".trim();
+
+  const redirectLink = useRef(null);
+  const [countPlayers, setCountPlayers] = useState<number>(0);
   const [players, setPlayers] = useState<Player[]>([])
+  const [openNotification, InstrictJSXForNotification] = notification.useNotification();
   const [modalInfo, setModalInfo] = useState<{isOpen: boolean, actTitle: string, description: string}>({
     isOpen: false,
     actTitle: "",
@@ -19,19 +27,38 @@ export default function devideRole(){
 
   const showActModal = (event: Event) => {
     players.map((value) => {
-      if((event!.target! as HTMLElement).innerText == value.role){
+      if((event!.target! as HTMLElement).innerText == value.name){
         setModalInfo({
           isOpen: true,
-          actTitle: value.name,
+          actTitle: value.role,
           description: ""
         });
-        (event!.target! as HTMLElement).style!.display = 'none'
+        (event!.target! as HTMLElement).style!.display = 'none';
+        setCountPlayers(countPlayers + 1);
+        if(players.length - 1 <= countPlayers){
+          openNotificationWithIcon("success", "پخش نقش ها انجام شد!", "تا لحظاتی به صفحه راوی یا خدا منتقل می شوید!")
+          setTimeout(
+            () => {
+              (redirectLink.current! as HTMLElement).click();
+          }, 1000);
+        }
       }
     })
   }
+  
+  const openNotificationWithIcon = (type: NotificationType, title: string, text: string) => {
+    openNotification[type]({
+      message: title,
+      description: text,
+    });
+  };
 
   useEffect(() => {
-    setPlayers(JSON.parse(localStorage.getItem("players")!));
+    try{
+      setPlayers(JSON.parse(localStorage.getItem("players")!));
+    }catch(e){
+      (redirectLink.current! as HTMLElement).click();
+    }
   }, [])
 
     return (
@@ -39,6 +66,8 @@ export default function devideRole(){
             color: "#fff",
             flexDirection: "column"
         }}>
+
+          {InstrictJSXForNotification}
 
           <Modal title='نمایش نقش' okType="primary" okText="متوجه شدم!" open={modalInfo.isOpen} onClose={()=>setModalInfo({
             isOpen: false,
@@ -95,11 +124,13 @@ export default function devideRole(){
                   cursor: "pointer",
                   borderRadius: 12
                 }}>
-                  {player.role}
+                  {player.name}
                 </Flex>
               )}
 
           </Flex>
+          
+          <Link href="../narrator" ref={redirectLink} />
 
         </Flex>
     )
