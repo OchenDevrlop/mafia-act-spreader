@@ -13,8 +13,6 @@ const vazir = Vazirmatn({ subsets: ["arabic"] });
 
 export default function devideRole(){
 
-  document.title = "نمایش و پخش نقش ها | مافیایی".trim();
-
   const redirectLink = useRef(null);
   const [countPlayers, setCountPlayers] = useState<number>(0);
   const [players, setPlayers] = useState<Player[]>([])
@@ -55,6 +53,7 @@ export default function devideRole(){
 
   useEffect(() => {
     try{
+      document.title = "نمایش و پخش نقش ها | مافیایی".trim();
       setPlayers(JSON.parse(localStorage.getItem("players")!));
     }catch(e){
       (redirectLink.current! as HTMLElement).click();

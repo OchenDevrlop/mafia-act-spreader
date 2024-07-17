@@ -8,7 +8,7 @@ import CitizenRoles from "../Objects/CitizenRoles"
 import MafiaRoles from "../Objects/MafiaRoles"
 import IndependentRoles from "../Objects/IndependentRoles"
 import Player from "../Interfaces/Player"
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { AnyObject } from "antd/es/_util/type"
 
 const vazir = Vazirmatn({ subsets: ["arabic"] });
@@ -17,9 +17,13 @@ var persianFinalActs : any = [];
 
 export default function selectRole(){
 
-    document.title = "انتخاب نقش ها | مافیایی".trim();
+    let players : Player[] = [];
+    
+    useEffect(() => {
+        document.title = "انتخاب نقش ها | مافیایی".trim();
+        players = JSON.parse(localStorage.getItem("players")!)
+    })
 
-    const players : Player[] = JSON.parse(localStorage.getItem("players")!);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
     const [citizenForm] = Form.useForm();
     const [mafiaForm] = Form.useForm();

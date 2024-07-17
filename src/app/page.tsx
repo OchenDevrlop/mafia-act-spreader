@@ -24,8 +24,6 @@ const vazir = Vazirmatn({ subsets: ["arabic"] });
 
 export default function Home() {
 
-  document.title = "افزودن و انتخاب بازیکنان | مافیایی".trim();
-
   const [player, setPlayer] = React.useState<Player[]>([]);
   const [form] = Form.useForm();
   const redirectLink = useRef(null);
@@ -66,6 +64,7 @@ export default function Home() {
   }
 
   useEffect(() => {
+    document.title = "افزودن و انتخاب بازیکنان | مافیایی".trim();
     const player = localStorage.getItem("players");
     if(player){
       try {

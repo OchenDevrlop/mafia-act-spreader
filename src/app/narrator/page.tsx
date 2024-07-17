@@ -11,12 +11,11 @@ let x = 0;
 
 export default function narrator(){
 
-    document.title = "صفحه راوی و لیست بازیکنان | مافیایی".trim();
-
-    const [players, setPlayers] = React.useState<Player[]>([]);
-    const [showActs, IsShowActs] = React.useState<boolean>(false);
-
-    React.useEffect(() => {
+  const [players, setPlayers] = React.useState<Player[]>([]);
+  const [showActs, IsShowActs] = React.useState<boolean>(false);
+  
+  React.useEffect(() => {
+        document.title = "صفحه راوی و لیست بازیکنان | مافیایی".trim();
         setPlayers(JSON.parse(localStorage.getItem("players")!));
     }, [])
 
